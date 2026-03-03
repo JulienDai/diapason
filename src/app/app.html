@@ -1,6 +1,6 @@
 <div class="diapason-container">
   <h1>🎵</h1>
-  <div class="subtitle">Diapason en ligne</div>
+  <div class="subtitle">Diapason online</div>
 
   <div class="control-group">
     <label>Note :</label>
@@ -36,7 +36,7 @@
   </div>
 
   <div class="control-group">
-    <label>Fréquence : <span class="value">{{selectedFreq | number:'1.0-0'}} Hz</span></label>
+    <label>Frequence : <span class="value">{{selectedFreq | number:'1.0-0'}} Hz</span></label>
     <div class="input-row">
       <input type="range" class="slider" min="50" max="2000" step="1" [(ngModel)]="selectedFreq" (input)="onFreqChange()" />
       <input type="number" class="number-input" min="50" max="2000" step="1" [(ngModel)]="selectedFreq" (input)="onFreqChange()" />
@@ -54,7 +54,7 @@
   <div class="button-group">
     <button class="btn btn-toggle" [class.playing]="isPlaying" (click)="togglePlay()">
       <span class="icon">{{ isPlaying ? '⏹' : '▶️' }}</span>
-      {{ isPlaying ? 'Stop' : 'Jouer' }}
+      {{ isPlaying ? 'Stop' : 'Play' }}
     </button>
   </div>
 </div>
