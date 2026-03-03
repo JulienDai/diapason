@@ -1,0 +1,60 @@
+<div class="diapason-container">
+  <h1>🎵</h1>
+  <div class="subtitle">Diapason en ligne</div>
+
+  <div class="control-group">
+    <label>Note :</label>
+    <div class="note-selector" #noteSelector>
+      <div class="note-dropdown" (click)="showNoteMenu = !showNoteMenu">
+        <div class="dropdown-display">{{selectedNote}}</div>
+        <div class="dropdown-arrow">▼</div>
+      </div>
+      <div class="note-menu" *ngIf="showNoteMenu">
+        <div class="octave-section" *ngFor="let oct of octaves">
+          <div class="octave-label">Octave {{oct}}</div>
+          <div class="notes-grid">
+            <div class="notes-row">
+              <button *ngFor="let noteName of noteNames.slice(0, 6)"
+                      class="note-option"
+                      [class.active]="selectedNote === noteName + oct"
+                      (click)="selectNoteByName(noteName, oct); showNoteMenu = false">
+                {{noteName}}
+              </button>
+            </div>
+            <div class="notes-row">
+              <button *ngFor="let noteName of noteNames.slice(6, 12)"
+                      class="note-option"
+                      [class.active]="selectedNote === noteName + oct"
+                      (click)="selectNoteByName(noteName, oct); showNoteMenu = false">
+                {{noteName}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label>Fréquence : <span class="value">{{selectedFreq | number:'1.0-0'}} Hz</span></label>
+    <div class="input-row">
+      <input type="range" class="slider" min="50" max="2000" step="1" [(ngModel)]="selectedFreq" (input)="onFreqChange()" />
+      <input type="number" class="number-input" min="50" max="2000" step="1" [(ngModel)]="selectedFreq" (input)="onFreqChange()" />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label>Volume : <span class="value">{{volume | percent}}</span></label>
+    <div class="input-row">
+      <input type="range" class="slider" min="0" max="1" step="0.01" [(ngModel)]="volume" (input)="updateVolume()" />
+      <input type="number" class="number-input" min="0" max="100" step="1" [value]="volume * 100" (change)="onVolumeInput($event)" />
+    </div>
+  </div>
+
+  <div class="button-group">
+    <button class="btn btn-toggle" [class.playing]="isPlaying" (click)="togglePlay()">
+      <span class="icon">{{ isPlaying ? '⏹' : '▶️' }}</span>
+      {{ isPlaying ? 'Stop' : 'Jouer' }}
+    </button>
+  </div>
+</div>
